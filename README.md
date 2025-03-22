@@ -14,6 +14,11 @@ ng serve
 
 Access the app at: http://localhost:4200
 
+login credentials
+
+Email: eve.holt@reqres.in
+Password: cityslicka
+
 To execute unit tests and check code coverage for example:
 ng test --include=src/app/components/edit-user-modal/edit-user-modal.component.spec.ts
 
