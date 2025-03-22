@@ -1,0 +1,61 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{userData()?.id ? 'Edit User' : 'Create New User'}}</h2>
+      <button class="close-btn" (click)="onClose()">×</button>
+    </div>
+    
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input 
+          id="first_name" 
+          type="text" 
+          formControlName="first_name"
+          class="form-input"
+          placeholder="Enter first name"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input 
+          id="last_name" 
+          type="text" 
+          formControlName="last_name"
+          class="form-input"
+          placeholder="Enter last name"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="job">Job Title</label>
+        <input 
+          id="job" 
+          type="text" 
+          formControlName="job"
+          class="form-input"
+          placeholder="Enter job title"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          id="email" 
+          type="email" 
+          formControlName="email"
+          class="form-input"
+          placeholder="Enter email address"
+        >
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="cancel-btn" (click)="onClose()">Cancel</button>
+        <button type="submit" class="save-btn" [disabled]="userForm.invalid">
+          {{userData()?.id ? 'Save Changes' : 'Create User'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

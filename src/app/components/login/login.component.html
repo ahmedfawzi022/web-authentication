@@ -1,0 +1,41 @@
+<div class="login-container">
+  <div class="workspace-image"></div>
+  <div class="login-form-container">
+    <div class="login-form-content">
+      <h1>Welcome</h1>
+      <p class="subtitle">Log in to access the Spaces Dashboard</p>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email"
+            placeholder="Enter your email"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password"
+            placeholder="Enter your password"
+          >
+        </div>
+
+        <div class="form-footer">
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid">
+          LOGIN
+        </button>
+        
+        <div *ngIf="error" class="error">{{error}}</div>
+      </form>
+    </div>
+  </div>
+</div>

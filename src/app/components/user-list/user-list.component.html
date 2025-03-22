@@ -1,0 +1,75 @@
+<div class="user-list-container">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#" class="breadcrumb-link">Home</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-current">Dashboard</span>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>User List</h1>
+    <button class="new-user-btn" (click)="openCreateUser()">
+      <span class="plus-icon">+</span>
+      New User
+    </button>
+  </div>
+
+  <!-- User List -->
+  <div class="user-list">
+    <div class="list-header">
+      <div class="header-user">User</div>
+      <div class="header-actions">Actions</div>
+    </div>
+
+    <div class="user-item" *ngFor="let user of users">
+      <div class="user-info">
+        <img [src]="user.avatar" [alt]="user.first_name" class="user-avatar">
+        <div class="user-name">{{user.first_name}} {{user.last_name}}</div>
+      </div>
+      <div class="user-actions">
+        <button class="action-btn delete" (click)="deleteUser(user.id)" title="Delete">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+        <button class="action-btn edit" (click)="editUser(user)" title="Edit">
+          <fa-icon [icon]="faPencilAlt"></fa-icon>
+        </button>
+        <button class="action-btn view" (click)="viewUser(user)" title="View">
+          <fa-icon [icon]="faChevronRight"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button 
+      [disabled]="currentPage === 1" 
+      (click)="changePage(currentPage - 1)"
+      class="pagination-btn"
+    >Previous</button>
+    <span class="pagination-info">Page {{currentPage}} of {{totalPages}}</span>
+    <button 
+      [disabled]="currentPage === totalPages" 
+      (click)="changePage(currentPage + 1)"
+      class="pagination-btn"
+    >Next</button>
+  </div>
+
+  <!-- Edit/Create User Modal -->
+  <app-edit-user-modal
+    *ngIf="selectedUser() !== null"
+    [userData]="selectedUser()"
+    (close)="closeEditModal()"
+    (save)="saveUser($event)"
+  ></app-edit-user-modal>
+
+  <!-- User Details Panel -->
+  <app-user-details-panel
+    *ngIf="viewingUser() !== null"
+    [userData]="viewingUser()"
+    (close)="closeDetailsPanel()"
+    (edit)="editUser(viewingUser()!)"
+    (delete)="deleteUser(viewingUser()?.id!)"
+  ></app-user-details-panel>
+</div>
